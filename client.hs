@@ -6,4 +6,7 @@ import Control.Monad.IO.Class
 
 type Query = M.Map String [String]
 
-main = simpleHttp "http://localhost:9200" >>= L.putStr
+main = search "http://localhost:9200/" M.empty >>= L.putStr
+
+search :: MonadIO m => String -> Query -> m L.ByteString
+search uri query = simpleHttp uri
